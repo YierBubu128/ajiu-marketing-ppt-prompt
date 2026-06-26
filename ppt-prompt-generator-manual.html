@@ -36,40 +36,19 @@ textarea{min-height:80px;resize:vertical}
 .sc-dot{width:28px;height:8px;border-radius:2px;margin-bottom:6px}
 .sc-title{font-weight:500;font-size:12px;margin-bottom:3px}
 .sc-sub{font-size:11px;color:#888}
-.tag{display:inline-block;font-size:10px;padding:1px 6px;border-radius:4px;margin-left:5px;vertical-align:middle}
-.tag-var{background:#fff8e6;color:#a06000;border:1px solid #f0d080}
-.tag-ai{background:#e8f5e9;color:#2e7d32;border:1px solid #a5d6a7}
+.tag-var{display:inline-block;font-size:10px;padding:1px 6px;border-radius:4px;margin-left:5px;vertical-align:middle;background:#fff8e6;color:#a06000;border:1px solid #f0d080}
 .nav{display:flex;justify-content:space-between;align-items:center;margin-top:1.5rem;padding-top:1rem;border-top:1px solid #e8e8e8}
 button{padding:8px 18px;border:1px solid #d0d0d0;border-radius:8px;background:#fff;font-size:13px;cursor:pointer;font-family:inherit;color:#1a1a1a;transition:background 0.15s}
 button:hover{background:#f0f0ee}
 button.primary{background:#1a1a1a;color:#fff;border-color:#1a1a1a}
 button.primary:hover{background:#333}
-button:disabled{opacity:0.5;cursor:not-allowed}
 .output-box{background:#f8f8f6;border:1px solid #e0e0e0;border-radius:10px;padding:1.25rem;font-size:12px;line-height:1.9;white-space:pre-wrap;word-break:break-word;max-height:500px;overflow-y:auto;color:#1a1a1a;font-family:inherit}
 .copy-bar{display:flex;justify-content:space-between;align-items:center;margin-bottom:0.75rem}
 .copy-bar span{font-size:14px;font-weight:500}
 .warn-box{background:#fffbea;border:1px solid #f0d070;border-radius:8px;padding:10px 12px;font-size:12px;color:#806000;margin-bottom:1.25rem}
-.info-box{background:#e8f5e9;border:1px solid #a5d6a7;border-radius:8px;padding:10px 12px;font-size:12px;color:#2e7d32;margin-bottom:1rem}
 .color-row{display:flex;align-items:center;gap:8px}
 .color-preview{width:22px;height:22px;border-radius:5px;border:1px solid #e0e0e0;flex-shrink:0}
 .prog{font-size:12px;color:#999}
-/* 导入区域 */
-.import-tabs{display:flex;gap:0;border:1px solid #e0e0e0;border-radius:8px;overflow:hidden;margin-bottom:1rem}
-.import-tab{flex:1;padding:8px;text-align:center;font-size:12px;cursor:pointer;background:#f5f5f3;color:#888;border-right:1px solid #e0e0e0;transition:all 0.15s}
-.import-tab:last-child{border-right:none}
-.import-tab.active{background:#1a1a1a;color:#fff;font-weight:500}
-.import-panel{display:none}
-.import-panel.active{display:block}
-.drop-zone{border:2px dashed #e0e0e0;border-radius:10px;padding:2rem;text-align:center;cursor:pointer;transition:all 0.15s;background:#fafafa}
-.drop-zone:hover,.drop-zone.dragover{border-color:#1a1a1a;background:#f5f5f3}
-.drop-zone-icon{font-size:32px;margin-bottom:8px}
-.drop-zone-text{font-size:13px;color:#666}
-.drop-zone-hint{font-size:11px;color:#aaa;margin-top:4px}
-.loading-bar{display:none;align-items:center;gap:10px;padding:12px;background:#f0f0ee;border-radius:8px;margin-top:1rem;font-size:13px;color:#555}
-.loading-bar.active{display:flex}
-.spinner{width:16px;height:16px;border:2px solid #ddd;border-top-color:#1a1a1a;border-radius:50%;animation:spin 0.8s linear infinite;flex-shrink:0}
-@keyframes spin{to{transform:rotate(360deg)}}
-.prefill-badge{font-size:10px;padding:1px 5px;border-radius:3px;background:#e8f5e9;color:#2e7d32;border:1px solid #a5d6a7;margin-left:4px}
 </style>
 </head>
 <body>
@@ -78,70 +57,22 @@ button:disabled{opacity:0.5;cursor:not-allowed}
 <p class="subtitle">填写项目信息，自动生成完整 AI 提示词，复制后发给任意 AI 工具</p>
 
 <div class="stepper" id="stepper">
-<div class="step active" onclick="goStep(0)">0 智能导入</div>
-<div class="step" onclick="goStep(1)">A 品牌项目</div>
-<div class="step" onclick="goStep(2)">B 视觉风格</div>
-<div class="step" onclick="goStep(3)">C 场景平台</div>
-<div class="step" onclick="goStep(4)">D 行业竞品</div>
-<div class="step" onclick="goStep(5)">E 目标预算</div>
-<div class="step" onclick="goStep(6)">F 大纲结构</div>
-<div class="step" onclick="goStep(7)">G 隐性背景</div>
-<div class="step" onclick="goStep(8)">生成指令</div>
+<div class="step active" onclick="goStep(0)">A 品牌项目</div>
+<div class="step" onclick="goStep(1)">B 视觉风格</div>
+<div class="step" onclick="goStep(2)">C 场景平台</div>
+<div class="step" onclick="goStep(3)">D 行业竞品</div>
+<div class="step" onclick="goStep(4)">E 目标预算</div>
+<div class="step" onclick="goStep(5)">F 大纲结构</div>
+<div class="step" onclick="goStep(6)">G 隐性背景</div>
+<div class="step" onclick="goStep(7)">生成指令</div>
 </div>
 
-<!-- 步骤0：智能导入 -->
+<!-- A 品牌项目 -->
 <div class="panel active" id="panel-0">
 <div class="card">
-<div class="field">
-<label>智能导入 Brief <span class="tag tag-ai">AI 自动解析</span></label>
-<div class="hint">上传客户 brief / brand intro 等文件，或直接粘贴文字描述，AI 自动提取关键信息并预填到后续表单中。G 模块（隐性背景）需手动补充。</div>
-</div>
-<div class="import-tabs">
-<div class="import-tab active" onclick="switchImportTab('text')">📝 粘贴文字</div>
-<div class="import-tab" onclick="switchImportTab('file')">📄 上传文件</div>
-</div>
-
-<div class="import-panel active" id="import-text">
-<textarea id="brief-text" style="min-height:160px" placeholder="将客户 brief、品牌介绍、项目说明等任何文字信息粘贴到这里...
-
-例如：
-- 微信群里客户发的项目背景
-- 邮件里的需求描述
-- 自己记录的客户沟通笔记
-- 任何包含项目信息的文字"></textarea>
-</div>
-
-<div class="import-panel" id="import-file">
-<div class="drop-zone" id="drop-zone" onclick="document.getElementById('file-input').click()" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="handleDrop(event)">
-<div class="drop-zone-icon">📎</div>
-<div class="drop-zone-text">点击选择文件，或拖拽到此处</div>
-<div class="drop-zone-hint">支持 PDF、Word (.docx)、TXT 文件</div>
-</div>
-<input type="file" id="file-input" accept=".pdf,.docx,.txt" style="display:none" onchange="handleFileSelect(event)">
-<div id="file-name" style="margin-top:8px;font-size:12px;color:#666"></div>
-</div>
-
-<div class="loading-bar" id="loading-bar">
-<div class="spinner"></div>
-<span id="loading-text">AI 正在解析文档，提取关键信息...</span>
-</div>
-</div>
-
-<div class="nav">
-<span class="prog" style="font-size:12px;color:#aaa">可跳过，直接手动填写</span>
-<div style="display:flex;gap:8px">
-<button onclick="goStep(1)">跳过，手动填写</button>
-<button class="primary" onclick="runImport()" id="import-btn">AI 自动解析 →</button>
-</div>
-</div>
-</div>
-
-<!-- 步骤1：品牌项目 -->
-<div class="panel" id="panel-1">
-<div class="card">
-<div class="field"><label>PPT 类型 <span class="tag tag-var">变量</span></label>
+<div class="field"><label>PPT 类型 <span class="tag-var">变量</span></label>
 <select id="ppt-type"><option>年度营销提案</option><option>媒介投放方案</option><option>竞品分析报告</option><option>大促节点策略</option><option>品牌策略提案</option><option>项目复盘报告</option><option>晋升述职</option><option>客户年终汇报</option></select></div>
-<div class="field"><label>目标受众 <span class="tag tag-var">变量</span></label>
+<div class="field"><label>目标受众 <span class="tag-var">变量</span></label>
 <input type="text" id="audience" placeholder="如：品牌CMO、市场总监、甲方决策层"></div>
 <div class="row2">
 <div class="field"><label>品牌名称（中文）</label><input type="text" id="brand-cn" placeholder="如：某某品牌"></div>
@@ -149,20 +80,20 @@ button:disabled{opacity:0.5;cursor:not-allowed}
 </div>
 <div class="row2">
 <div class="field"><label>所属集团（可留空）</label><input type="text" id="group" placeholder="如：联合利华"></div>
-<div class="field"><label>项目周期</label><input type="text" id="period" placeholder="如：2025年Q3，7月—9月"></div>
+<div class="field"><label>项目周期</label><input type="text" id="period" placeholder="如：2026年Q3，7月—9月"></div>
 </div>
 <div class="field"><label>核心目标</label>
 <textarea id="goal" placeholder="如：提升品牌在25-35岁女性中的认知度，同时拉动双十一销售转化"></textarea></div>
 <div class="field"><label>PPT 页数</label>
 <input type="text" id="pages" placeholder="如：25页"></div>
 </div>
-<div class="nav"><button onclick="goStep(0)">← 上一步</button><button class="primary" onclick="goStep(2)">下一步 →</button></div>
+<div class="nav"><span class="prog">第 1 步，共 7 步</span><button class="primary" onclick="goStep(1)">下一步 →</button></div>
 </div>
 
-<!-- 步骤2：视觉风格 -->
-<div class="panel" id="panel-2">
+<!-- B 视觉风格 -->
+<div class="panel" id="panel-1">
 <div class="card">
-<div class="field"><label>选择视觉风格 <span class="tag tag-var">变量</span></label>
+<div class="field"><label>选择视觉风格 <span class="tag-var">变量</span></label>
 <div class="style-grid" id="style-grid">
 <div class="style-card selected" onclick="selectStyle(this,'A')"><div class="sc-dot" style="background:#FF5722"></div><div class="sc-title">风格 A · 暖色行动感</div><div class="sc-sub">大促/效果营销</div></div>
 <div class="style-card" onclick="selectStyle(this,'B')"><div class="sc-dot" style="background:#1A1A2E"></div><div class="sc-title">风格 B · 欧美 Bold</div><div class="sc-sub">品牌提案</div></div>
@@ -170,22 +101,22 @@ button:disabled{opacity:0.5;cursor:not-allowed}
 <div class="style-card" onclick="selectStyle(this,'E')"><div class="sc-dot" style="background:#003366"></div><div class="sc-title">风格 E · 咨询感</div><div class="sc-sub">战略汇报/述职</div></div>
 <div class="style-card" onclick="selectStyle(this,'D')"><div class="sc-dot" style="background:#cccccc"></div><div class="sc-title">风格 D · 品牌色定制</div><div class="sc-sub">输入HEX自动适配</div></div>
 </div></div>
-<div class="field"><label>品牌主色 HEX <span class="tag tag-var">变量</span></label>
+<div class="field"><label>品牌主色 HEX <span class="tag-var">变量</span></label>
 <div class="color-row"><input type="text" id="color1" placeholder="#FF4500" style="width:140px" oninput="updatePreview('prev1',this.value)"><div class="color-preview" id="prev1"></div><input type="text" id="color1-name" placeholder="调性说明，如：热情、行动感" style="flex:1"></div></div>
 <div class="field"><label>辅助色 HEX（可留空）</label>
 <div class="color-row"><input type="text" id="color2" placeholder="#1A1A2E" style="width:140px" oninput="updatePreview('prev2',this.value)"><div class="color-preview" id="prev2"></div><input type="text" id="color2-name" placeholder="调性说明，如：沉稳、专业" style="flex:1"></div></div>
 <div class="field"><label>禁用色 / 视觉禁忌</label>
 <input type="text" id="color-ban" placeholder="如：不得使用竞品XX的品牌红 #E60012，或无限制"></div>
 <div class="field"><label>品牌调性禁忌词</label>
-<input type="text" id="tone-ban" placeholder="如：不得出现"最便宜"等低价感词汇，或无"></div>
+<input type="text" id="tone-ban" placeholder='如：不得出现"最便宜"等低价感词汇，或无'></div>
 </div>
-<div class="nav"><button onclick="goStep(1)">← 上一步</button><button class="primary" onclick="goStep(3)">下一步 →</button></div>
+<div class="nav"><button onclick="goStep(0)">← 上一步</button><button class="primary" onclick="goStep(2)">下一步 →</button></div>
 </div>
 
-<!-- 步骤3：场景平台 -->
-<div class="panel" id="panel-3">
+<!-- C 场景平台 -->
+<div class="panel" id="panel-2">
 <div class="card">
-<div class="field"><label>细分场景（可多选）<span class="tag tag-var">变量</span></label>
+<div class="field"><label>细分场景（可多选）<span class="tag-var">变量</span></label>
 <div class="check-group" id="scenes">
 <label class="check-item"><input type="checkbox" value="品牌广告（认知/形象）"> 品牌广告</label>
 <label class="check-item"><input type="checkbox" value="效果广告（转化/ROI）"> 效果广告</label>
@@ -207,19 +138,19 @@ button:disabled{opacity:0.5;cursor:not-allowed}
 抖音：信息流 / TopView / 达人合作 / 搜索广告
 微信：朋友圈广告 / 公众号 / 视频号"></textarea></div>
 </div>
-<div class="nav"><button onclick="goStep(2)">← 上一步</button><button class="primary" onclick="goStep(4)">下一步 →</button></div>
+<div class="nav"><button onclick="goStep(1)">← 上一步</button><button class="primary" onclick="goStep(3)">下一步 →</button></div>
 </div>
 
-<!-- 步骤4：行业竞品 -->
-<div class="panel" id="panel-4">
+<!-- D 行业竞品 -->
+<div class="panel" id="panel-3">
 <div class="card">
 <div class="row2">
-<div class="field"><label>所属行业 <span class="tag tag-var">变量</span></label>
+<div class="field"><label>所属行业 <span class="tag-var">变量</span></label>
 <select id="industry"><option>美妆个护</option><option>快消食品</option><option>3C数码</option><option>新能源汽车</option><option>服装</option><option>金融/保险</option><option>医疗健康</option><option>母婴</option><option>宠物</option><option>教育</option><option>其他</option></select></div>
 <div class="field"><label>品牌所处阶段</label>
 <select id="stage"><option>新品牌冷启动</option><option>成熟品牌维护</option><option>品类教育期</option><option>大促节点冲刺</option><option>品牌年度规划</option></select></div>
 </div>
-<div class="field"><label>竞品清单 <span class="tag tag-var">变量</span></label>
+<div class="field"><label>竞品清单 <span class="tag-var">变量</span></label>
 <div class="hint">每行一个，格式：品牌名 —— 重点关注维度</div>
 <textarea id="competitors" placeholder="竞品A —— 投放声量、达人矩阵结构
 竞品B —— 创意策略、落地页逻辑
@@ -230,13 +161,13 @@ button:disabled{opacity:0.5;cursor:not-allowed}
 <label class="check-item"><input type="radio" name="comp-depth" value="深度：拆解达人矩阵 + 创意策略 + 落地页逻辑 + 转化路径"> 深度（全链路拆解）</label>
 </div></div>
 </div>
-<div class="nav"><button onclick="goStep(3)">← 上一步</button><button class="primary" onclick="goStep(5)">下一步 →</button></div>
+<div class="nav"><button onclick="goStep(2)">← 上一步</button><button class="primary" onclick="goStep(4)">下一步 →</button></div>
 </div>
 
-<!-- 步骤5：目标预算 -->
-<div class="panel" id="panel-5">
+<!-- E 目标预算 -->
+<div class="panel" id="panel-4">
 <div class="card">
-<div class="field"><label>核心要解决的问题 <span class="tag tag-var">变量</span></label>
+<div class="field"><label>核心要解决的问题 <span class="tag-var">变量</span></label>
 <textarea id="problem" placeholder="如：618大促前品牌在小红书搜索份额被竞品压制，需通过种草+搜索拦截组合策略反超"></textarea></div>
 <div class="field"><label>成功衡量标准 / KPI</label>
 <textarea id="kpi" placeholder="品牌声量：小红书品牌词搜索量提升30%
@@ -247,13 +178,13 @@ button:disabled{opacity:0.5;cursor:not-allowed}
 <div class="field"><label>预算偏好 / 敏感点</label><input type="text" id="budget-note" placeholder="如：达人费用占比不超过60%"></div>
 </div>
 </div>
-<div class="nav"><button onclick="goStep(4)">← 上一步</button><button class="primary" onclick="goStep(6)">下一步 →</button></div>
+<div class="nav"><button onclick="goStep(3)">← 上一步</button><button class="primary" onclick="goStep(5)">下一步 →</button></div>
 </div>
 
-<!-- 步骤6：大纲结构 -->
-<div class="panel" id="panel-6">
+<!-- F 大纲结构 -->
+<div class="panel" id="panel-5">
 <div class="card">
-<div class="field"><label>PPT 内容结构大纲 <span class="tag tag-var">变量</span></label>
+<div class="field"><label>PPT 内容结构大纲 <span class="tag-var">变量</span></label>
 <div class="hint">按页面顺序填写，可自由增删调整</div>
 <textarea id="outline" style="min-height:200px" placeholder="P1 封面
 P2 目录
@@ -270,11 +201,11 @@ P23 风险与应对
 P24 下一步行动
 P25 附录"></textarea></div>
 </div>
-<div class="nav"><button onclick="goStep(5)">← 上一步</button><button class="primary" onclick="goStep(7)">下一步 →</button></div>
+<div class="nav"><button onclick="goStep(4)">← 上一步</button><button class="primary" onclick="goStep(6)">下一步 →</button></div>
 </div>
 
-<!-- 步骤7：隐性背景 -->
-<div class="panel" id="panel-7">
+<!-- G 隐性背景 -->
+<div class="panel" id="panel-6">
 <div class="warn-box">⚠️ 此模块为项目敏感信息，仅用于生成指令，不会被存储或上传</div>
 <div class="card">
 <div class="row2">
@@ -296,18 +227,18 @@ P25 附录"></textarea></div>
 <div class="field"><label>其他特殊情况（可留空）</label>
 <textarea id="other-bg" placeholder="任何你觉得AI需要知道的背景信息"></textarea></div>
 </div>
-<div class="nav"><button onclick="goStep(6)">← 上一步</button><button class="primary" onclick="generate()">生成完整指令 →</button></div>
+<div class="nav"><button onclick="goStep(5)">← 上一步</button><button class="primary" onclick="generate()">生成完整指令 →</button></div>
 </div>
 
-<!-- 步骤8：生成结果 -->
-<div class="panel" id="panel-8">
+<!-- 生成结果 -->
+<div class="panel" id="panel-7">
 <div class="copy-bar">
 <span>完整 PPT 提案指令</span>
 <button class="primary" onclick="copyOutput()" id="copy-btn">复制全部</button>
 </div>
 <div class="output-box" id="output"></div>
 <div class="nav" style="margin-top:1rem">
-<button onclick="goStep(7)">← 返回修改</button>
+<button onclick="goStep(6)">← 返回修改</button>
 <button onclick="resetAll()">重新填写</button>
 </div>
 </div>
@@ -316,9 +247,6 @@ P25 附录"></textarea></div>
 <script>
 var currentStep=0;
 var selectedStyle='A';
-var fileData=null;
-var fileType=null;
-
 var styleNames={
   A:'暖色行动感（橙红主调，数字强调，适合大促/效果营销）',
   B:'欧美Bold（深色底+撞色大标题，适合品牌提案）',
@@ -336,126 +264,6 @@ function goStep(n){
   });
   currentStep=n;
   window.scrollTo(0,0);
-}
-
-function switchImportTab(type){
-  document.querySelectorAll('.import-tab').forEach(function(t,i){
-    t.classList.toggle('active', (i===0&&type==='text')||(i===1&&type==='file'));
-  });
-  document.getElementById('import-text').classList.toggle('active', type==='text');
-  document.getElementById('import-file').classList.toggle('active', type==='file');
-}
-
-function handleDragOver(e){e.preventDefault();document.getElementById('drop-zone').classList.add('dragover');}
-function handleDragLeave(e){document.getElementById('drop-zone').classList.remove('dragover');}
-function handleDrop(e){
-  e.preventDefault();
-  document.getElementById('drop-zone').classList.remove('dragover');
-  var file=e.dataTransfer.files[0];
-  if(file)processFile(file);
-}
-function handleFileSelect(e){
-  var file=e.target.files[0];
-  if(file)processFile(file);
-}
-
-function processFile(file){
-  document.getElementById('file-name').textContent='已选择：'+file.name;
-  var reader=new FileReader();
-  if(file.name.endsWith('.pdf')){
-    fileType='pdf';
-    reader.onload=function(e){fileData=e.target.result.split(',')[1];};
-    reader.readAsDataURL(file);
-  } else {
-    fileType='text';
-    reader.onload=function(e){fileData=e.target.result;};
-    reader.readAsText(file,'UTF-8');
-  }
-}
-
-async function runImport(){
-  var textInput=document.getElementById('brief-text').value.trim();
-  var activeTab=document.querySelector('.import-tab.active').textContent.includes('文字');
-
-  if(activeTab && !textInput){alert('请先粘贴 brief 文字内容');return;}
-  if(!activeTab && !fileData){alert('请先选择文件');return;}
-
-  var btn=document.getElementById('import-btn');
-  var loading=document.getElementById('loading-bar');
-  btn.disabled=true;
-  loading.classList.add('active');
-  document.getElementById('loading-text').textContent='AI 正在解析，提取关键信息...';
-
-  try{
-    var messages;
-    if(activeTab){
-      messages=[{role:'user',content:'你是一位营销策略专家。请从以下客户 brief 或项目背景文字中，提取关键信息并以 JSON 格式返回。\n\n只返回 JSON，不要任何解释或 markdown 代码块。\n\n需要提取的字段：\n- ppt_type: PPT类型（年度营销提案/媒介投放方案/竞品分析报告/大促节点策略/品牌策略提案/项目复盘报告，从这几个中选最合适的）\n- audience: 目标受众\n- brand_cn: 品牌中文名\n- brand_en: 品牌英文名\n- group: 所属集团\n- period: 项目周期\n- goal: 核心目标\n- industry: 所属行业\n- stage: 品牌阶段（新品牌冷启动/成熟品牌维护/品类教育期/大促节点冲刺/品牌年度规划）\n- competitors: 竞品列表（字符串，每行一个）\n- problem: 核心要解决的问题\n- kpi: 成功衡量标准\n- budget: 预算范围\n- platform_main: 主平台\n- platform_sub: 辅助平台\n\n提取不到的字段留空字符串。\n\n文字内容：\n'+textInput}];
-    } else {
-      var content;
-      if(fileType==='pdf'){
-        content=[{type:'document',source:{type:'base64',media_type:'application/pdf',data:fileData}},{type:'text',text:'你是一位营销策略专家。请从以上文档中提取关键项目信息，以 JSON 格式返回。只返回 JSON，不要任何解释或 markdown 代码块。\n\n需要提取的字段：ppt_type, audience, brand_cn, brand_en, group, period, goal, industry, stage, competitors（字符串每行一个）, problem, kpi, budget, platform_main, platform_sub。提取不到的留空字符串。'}];
-      } else {
-        content=[{type:'text',text:'你是一位营销策略专家。请从以下文档内容中提取关键项目信息，以 JSON 格式返回。只返回 JSON，不要任何解释或 markdown 代码块。\n\n需要提取的字段：ppt_type, audience, brand_cn, brand_en, group, period, goal, industry, stage, competitors（字符串每行一个）, problem, kpi, budget, platform_main, platform_sub。提取不到的留空字符串。\n\n文档内容：\n'+fileData}];
-      }
-      messages=[{role:'user',content:content}];
-    }
-
-    var response=await fetch('https://api.anthropic.com/v1/messages',{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:1000,messages:messages})
-    });
-    var data=await response.json();
-    var text=data.content.map(function(i){return i.text||'';}).join('');
-    var clean=text.replace(/```json|```/g,'').trim();
-    var parsed=JSON.parse(clean);
-
-    // 预填表单
-    if(parsed.ppt_type){
-      var sel=document.getElementById('ppt-type');
-      for(var i=0;i<sel.options.length;i++){if(sel.options[i].value===parsed.ppt_type)sel.selectedIndex=i;}
-    }
-    if(parsed.audience)document.getElementById('audience').value=parsed.audience;
-    if(parsed.brand_cn)document.getElementById('brand-cn').value=parsed.brand_cn;
-    if(parsed.brand_en)document.getElementById('brand-en').value=parsed.brand_en;
-    if(parsed.group)document.getElementById('group').value=parsed.group;
-    if(parsed.period)document.getElementById('period').value=parsed.period;
-    if(parsed.goal)document.getElementById('goal').value=parsed.goal;
-    if(parsed.industry){
-      var isel=document.getElementById('industry');
-      for(var j=0;j<isel.options.length;j++){if(isel.options[j].value===parsed.industry)isel.selectedIndex=j;}
-    }
-    if(parsed.stage){
-      var ssel=document.getElementById('stage');
-      for(var k=0;k<ssel.options.length;k++){if(ssel.options[k].value===parsed.stage)ssel.selectedIndex=k;}
-    }
-    if(parsed.competitors)document.getElementById('competitors').value=parsed.competitors;
-    if(parsed.problem)document.getElementById('problem').value=parsed.problem;
-    if(parsed.kpi)document.getElementById('kpi').value=parsed.kpi;
-    if(parsed.budget)document.getElementById('budget').value=parsed.budget;
-    if(parsed.platform_main)document.getElementById('platform-main').value=parsed.platform_main;
-    if(parsed.platform_sub)document.getElementById('platform-sub').value=parsed.platform_sub;
-
-    loading.classList.remove('active');
-    btn.disabled=false;
-
-    // 计算填充了多少字段
-    var filled=Object.values(parsed).filter(function(v){return v&&v.trim&&v.trim()!==''}).length;
-    document.getElementById('loading-text').textContent='';
-    
-    // 显示成功提示后跳转
-    var successMsg='✅ 解析完成，已自动填写 '+filled+' 个字段，请逐步检查和补充';
-    document.getElementById('loading-text').textContent=successMsg;
-    loading.style.background='#e8f5e9';
-    loading.style.color='#2e7d32';
-    loading.querySelector('.spinner').style.display='none';
-    setTimeout(function(){goStep(1);},1500);
-
-  } catch(err){
-    loading.classList.remove('active');
-    btn.disabled=false;
-    alert('解析失败，请检查网络或手动填写。错误：'+err.message);
-  }
 }
 
 function selectStyle(el,code){
@@ -483,7 +291,7 @@ function getRadio(name){
 function v(id){var el=document.getElementById(id);return el?el.value.trim():'';}
 
 function generate(){
-  goStep(8);
+  goStep(7);
   var scenes=getChecked();
   var c1=v('color1'),c2=v('color2');
   var styleColors={
@@ -543,15 +351,6 @@ function resetAll(){
   document.querySelectorAll('input[type=radio]').forEach(function(el,i){if(i===0)el.checked=true;});
   document.querySelectorAll('.style-card').forEach(function(el,i){el.classList.toggle('selected',i===0);});
   selectedStyle='A';
-  fileData=null;
-  fileType=null;
-  document.getElementById('file-name').textContent='';
-  document.getElementById('brief-text').value='';
-  var loading=document.getElementById('loading-bar');
-  loading.classList.remove('active');
-  loading.style.background='';
-  loading.style.color='';
-  loading.querySelector('.spinner').style.display='';
   goStep(0);
 }
 </script>
