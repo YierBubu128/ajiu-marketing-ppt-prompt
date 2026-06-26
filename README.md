@@ -19,7 +19,6 @@
 | 文件 | 内容 |
 |------|------|
 | `ppt-prompt-generator-manual.html` | 手动填写版，浏览器打开即用，无需账号 |
-| `ppt-prompt-generator-ai.jsx` | AI 智能导入版，有 Claude 账号可直接运行，支持粘贴 brief 自动解析预填 |
 | `ppt-prompt-SKILL.md` | 完整指令框架，含所有模块说明、风格库、行业备注、红线约束 |
 
 ---
@@ -34,16 +33,7 @@
 
 智能导入功能需要调用 API，目前个人暂时无法承担公开用户的 API 费用，所以这个版本暂不支持，请见谅 🙏
 
-**方法二：AI 智能导入版（需要 Claude 账号）**
-
-1. 下载 `ppt-prompt-generator-ai.jsx`
-2. 把文件发给 Claude，Claude 直接运行
-3. 步骤 0 粘贴 brief 文字，点「AI 自动解析」自动预填 A-G 模块
-4. 逐步检查补充后生成完整指令
-
-消耗的是你自己账号的 token，不会产生额外费用。
-
-**方法三：直接用 SKILL.md**
+**方法二：直接用 SKILL.md**
 
 打开 `ppt-prompt-SKILL.md`，复制完整 Prompt 模板，按提示填写后发给 AI。
 
